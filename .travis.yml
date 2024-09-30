@@ -7,5 +7,5 @@ env:
   - BUHOI_REDIS=redis://localhost
   - BUHOI_MQ=amqp://guest:guest@localhost
 node_js:
-  - "22"
+  - "18"
 script: npm run travis-coveralls

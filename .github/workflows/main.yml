@@ -21,25 +21,30 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: latest
+
       - name: Install Node.js dependencies
         run: npm install --include=dev
+
       - name: Run linter with report
         run: npm run lint
         continue-on-error: true
+
       - name: Save linting report
         run: npx eslint --output-file eslint_report.json --format json .
         continue-on-error: true
+
       - name: Annotate Code Linting Results
         uses: ataylorme/eslint-annotate-action@v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           report-json: "eslint_report.json"
   tests:
-    name: run tests an coverage report
+    name: run tests
     runs-on: ubuntu-latest
     env:
       NODE_ENV: development
@@ -65,33 +70,32 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
-#        with:
-#          ref: ${{ github.event.pull_request.head.sha }}
-#          fetch-depth: 1000 # Set this according to the size of your git history
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: latest
+
       - name: Install Node.js dependencies
         run: npm install --include=dev
+
       - name: Install Mocha reporter
         run: npm install mocha-ctrf-json-reporter
-      - name: Run tests with reporter
+
+      - name: Run tests
         run: npx mocha -r should --reporter mocha-ctrf-json-reporter --require tests/mocha-hooks.js --recursive tests
         continue-on-error: true
+
       - name: Add annotations
         run: npx github-actions-ctrf ctrf-report.json
         working-directory: ctrf
-#      - name: Fetch base
-#        run: git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1000
-#      - name: Run NYC
-#        run: npm run cover
-#        continue-on-error: true
-#      - name: Generate NYC report
-#        run: npx nyc report --reporter json-summary --report-dir nyc-coverage-report --exclude-after-remap false
-#      - name: Report NYC coverage
-#        uses: sidx1024/report-nyc-coverage-github-action@v1.2.7
-#        with:
-#          coverage_file: "nyc-coverage-report/coverage-summary.json"
-#          comment_template_file: ".github/nyc-coverage-report/comment-template.md"
-#          base_coverage_file: ""
+
+      - name: Create tests coverage report
+        run: npm run test-coverage
+        continue-on-error: true
+
+      - name: Send report to Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: .nyc_output/coverage.lcov

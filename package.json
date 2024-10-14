@@ -42,7 +42,6 @@
     "@eslint/compat": "1.1.1",
     "@stylistic/eslint-plugin": "2.6.1",
     "axios": "1.7.7",
-    "coveralls": "3.1.1",
     "coveralls-next": "^4.2.1",
     "eslint": "9.8.0",
     "eslint-plugin-unused-imports": "4.0.1",
@@ -62,7 +61,7 @@
     "prepush": "npm t",
     "lint": "eslint .",
     "test": "mocha -r should --require tests/mocha-hooks.js --recursive tests",
-    "cover": "nyc mocha -r should --require tests/mocha-hooks.js --recursive tests",
+    "test-coverage": "nyc npm run test && nyc report --reporter=text-lcov > .nyc_output/coverage.lcov",
     "release-patch": "npm t && npm version patch && npm publish && git push",
     "release-minor": "npm t && npm version minor && npm publish && git push",
     "release-major": "npm t && npm version major && npm publish && git push"

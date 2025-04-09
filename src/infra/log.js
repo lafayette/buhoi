@@ -3,11 +3,21 @@ const totlog = require('totlog')
 module.exports = { initialize, terminate }
 
 function initialize () {
-  const { BUHOI_SLACK, BUHOI_LOGSTASH } = process.env
+  const { BUHOI_SLACK, BUHOI_TELEGRAM, BUHOI_LOGSTASH } = process.env
 
   if (BUHOI_SLACK) {
     const [token, channel, icon] = BUHOI_SLACK.split(';')
     const slack = totlog.appenders.slack({ token, channel, icon })
+    totlog.on('message', m => {
+      if (m.level === 'error') {
+        slack(m)
+      }
+    })
+  }
+
+  if (BUHOI_TELEGRAM) {
+    const [botToken, chatId] = BUHOI_TELEGRAM.split(';')
+    const slack = totlog.appenders.telegram({ botToken, chatId })
     totlog.on('message', m => {
       if (m.level === 'error') {
         slack(m)

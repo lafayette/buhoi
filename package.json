@@ -35,7 +35,7 @@
     "pg": "8.12.0",
     "raw-body": "2.5.2",
     "redis": "4.7.0",
-    "totlog": "github:lafayette/totlog#27fdfc3f6a1bf278692b050ab4a070505cef8c3f",
+    "totlog": "github:lafayette/totlog#c1c6046a14ebb03ffd85f9c0c8b9b92bd6eb9db3",
     "webpack": "5.93.0"
   },
   "devDependencies": {

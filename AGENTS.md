@@ -82,6 +82,11 @@ of guessing.
   function source, so do not reformat them away.
 - Tasks are files under `<feature>/tasks/`; they export `handler` plus optionally `event`,
   `schedule`, `options` and `persistent`.
+- The `schedule` job handler in `src/task-server/index.js` returns a promise that never settles, and
+  that is load-bearing, not a bug. `mqu` acks a message only after the handler's promise resolves, so
+  leaving it pending keeps the message assigned to this instance — which is what makes exactly one
+  running instance own the `node-schedule` registrations. Resolving it would ack the message, the
+  message would leave the queue, and after a restart nothing would register the schedules again.
 - Logging goes through `src/infra/log.js`, which wires totlog appenders from env variables.
 
 ## Git rules

@@ -87,7 +87,12 @@ jobs:
         continue-on-error: true
 
       - name: Add annotations
-        run: npx github-actions-ctrf ctrf/ctrf-report.json
+        if: always()
+        uses: ctrf-io/github-test-reporter@v1
+        with:
+          report-path: ./ctrf/ctrf-report.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create tests coverage report
         run: npm run test-coverage

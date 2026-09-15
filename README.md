@@ -2,9 +2,6 @@
 
 Because drunk people can create web apps too.
 
-[![Build Status](https://travis-ci.org/titarenko/buhoi.svg?branch=master)](https://travis-ci.org/titarenko/buhoi)
-[![Coverage Status](https://coveralls.io/repos/github/titarenko/buhoi/badge.svg?branch=master)](https://coveralls.io/github/titarenko/buhoi?branch=master)
-
 Buhoi is an application server allowing you to write robust full-featured web-applications (with background tasks support) within tight timeframes.
 
 ![logo](https://i0.wp.com/eduncovered.com/wp-content/uploads/2014/01/simpsons-bender-drunk.jpg)
@@ -33,6 +30,7 @@ Buhoi is an application server allowing you to write robust full-featured web-ap
 | BUHOI_MAX_INPUT_SIZE | no | max size of RPC request | size | 10mb |
 | BUHOI_SLACK | no | slack token, channel and icon to post error messages | token;channel;icon | xoxb-...;alerts;:hideyourpain: |
 | BUHOI_TELEGRAM | no | telegram bot token and chat id to post error messages | botToken;chatId | 123456:AA...;-1001234567890 |
+| BUHOI_MATTERMOST | no | mattermost incoming webhook url to post error messages, with optional channel, username and icon overriding the webhook defaults | url;channel;username;icon | https://chat.example.com/hooks/xxxxxxxx;alerts;buhoi;:robot_face: |
 | BUHOI_LOGSTASH | no | logstash socket to send each log message | udp://ip:port or tcp://ip:port | udp://192.168.1.10:5000 |
 
 ## branches

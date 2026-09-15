@@ -25,7 +25,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: latest
+          node-version: '24'
 
       - name: Install Node.js dependencies
         run: npm install --include=dev
@@ -74,7 +74,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: latest
+          node-version: '24'
 
       - name: Install Node.js dependencies
         run: npm install --include=dev
@@ -87,8 +87,7 @@ jobs:
         continue-on-error: true
 
       - name: Add annotations
-        run: npx github-actions-ctrf ctrf-report.json
-        working-directory: ctrf
+        run: npx github-actions-ctrf ctrf/ctrf-report.json
 
       - name: Create tests coverage report
         run: npm run test-coverage

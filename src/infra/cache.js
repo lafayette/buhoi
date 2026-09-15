@@ -51,7 +51,11 @@ async function get (key) {
     return
   }
 
-  return JSON.parse(value)
+  try {
+    return JSON.parse(value)
+  } catch (e) {
+    // an unparseable cached value is a cache miss
+  }
 }
 
 function createCachedFunction (fn, ttl) {

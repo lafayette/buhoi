@@ -54,7 +54,11 @@ async function get (key) {
     return
   }
 
-  return JSON.parse(value)
+  try {
+    return JSON.parse(value)
+  } catch {
+    return
+  }
 }
 
 function createCachedFunction (fn, ttl) {

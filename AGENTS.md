@@ -91,13 +91,18 @@ of guessing.
 
 ## Git rules
 
-- Local commits and `git fetch` are fine.
+Local commits and `git fetch` are fine. Everything below is about writing to a remote.
+
 - **Writing to a remote is strictly forbidden without the user's explicit consent for that specific
   operation.** This covers `git push` (including `--force`), creating or deleting remote branches and
   tags, opening or merging pull requests, and publishing to npm.
-- Ask immediately before the operation and name exactly what it will change. Consent for one
-  operation is never consent for the next one, even on the same branch minutes later.
-- A bare "yes" arriving together with a new task is not consent to push — it answers the task, not a
-  question asked earlier in the conversation. Finish the task, then ask again.
-- This repository has two remotes: `origin` (lafayette, the fork that is worked on) and `titarenko`
-  (upstream). The same rule applies to both.
+- Consent is scoped to the commits that already existed when it was given, and it expires with the
+  message that gave it. Anything committed afterwards needs a new ask — a minute later, and even when
+  it directly continues the work that was just approved. "You can push X" is never standing
+  permission, and finishing a follow-up task does not re-authorize a push.
+- A bare "yes" arriving together with a new task answers the task. It is not consent to push.
+- Ask in the same turn you intend to push, immediately before pushing, and name exactly what will
+  change: the remote, each refspec, and the old and new SHA. Then wait for the answer in the next
+  message. Never push first and report afterwards.
+- If you are unsure whether the consent you have covers what you are about to push, it does not.
+  Ask again; the cost of asking is a sentence, the cost of being wrong is a force-push.

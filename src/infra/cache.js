@@ -27,7 +27,12 @@ function set (key, value, ttl) {
   if (!client) {
     return
   }
-  return client.setAsync(key, JSON.stringify(value), 'EX', Math.ceil(ttl / 1000))
+
+  if (value) {
+    return client.setAsync(key, JSON.stringify(value), 'EX', Math.ceil(ttl / 1000))
+  } else {
+    return client.delAsync(key)
+  }
 }
 
 async function get (key) {

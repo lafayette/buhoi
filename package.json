@@ -33,7 +33,7 @@
     "raw-body": "^2.3.2",
     "redis": "^2.8.0",
     "request": "^2.88.0",
-    "totlog": "github:lafayette/totlog#f40d36d5138a1fa3987d45da6edbc430c2fc79c9",
+    "totlog": "github:lafayette/totlog#436c0a1085f3c668641bfc8d8bd01c3a2da20e82",
     "webpack": "^3.10.0"
   },
   "devDependencies": {

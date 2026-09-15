@@ -60,8 +60,9 @@ NODE_ENV=development BUHOI_REDIS=redis://localhost BUHOI_MQ=amqp://guest:guest@l
 instance around the whole suite, so a spec that leaves a server or connection behind breaks
 everything after it.
 
-CI on this branch is still `.travis.yml`, pointing at travis-ci.org, which no longer runs anything.
-Treat this branch as having no CI: run the linter and the suite locally before committing.
+This branch has no CI. Its `.travis.yml` was removed: travis-ci.org has been shut down for years, so
+the file described a pipeline that could never run, and `master`'s GitHub Actions workflow is scoped
+to `master`. Run the linter and the suite locally before committing.
 
 ## Code style
 

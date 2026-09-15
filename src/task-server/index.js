@@ -5,7 +5,7 @@ const { scheduleJob } = require('node-schedule')
 module.exports = { start, stop }
 
 function start ({ featuresPath } = { }) {
-  assert(typeof featuresPath, 'string')
+  assert.equal(typeof featuresPath, 'string')
 
   const { mq } = require('../infra')
   if (!mq || process.env.BUHOI_DISABLE_TASKS) {

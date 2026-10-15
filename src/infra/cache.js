@@ -13,7 +13,7 @@ function initialize () {
   const { BUHOI_REDIS } = process.env
 
   if (BUHOI_REDIS) {
-    module.exports.client = createClient(BUHOI_REDIS)
+    module.exports.client = createClient({ url: BUHOI_REDIS })
   }
 
   return module.exports

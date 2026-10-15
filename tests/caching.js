@@ -1,5 +1,6 @@
 /* eslint-env mocha */
 
+const buhoi = require('../src')
 const request = require('./request')
 
 describe('buhoi caching', function () {
@@ -7,6 +8,10 @@ describe('buhoi caching', function () {
     if (!process.env.BUHOI_REDIS) {
       this.skip()
     }
+  })
+
+  it('should connect to the redis named in BUHOI_REDIS', function () {
+    buhoi.cache.client.options.url.should.equal(process.env.BUHOI_REDIS)
   })
 
   it('should cache results if requested', async function () {

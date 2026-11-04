@@ -133,7 +133,7 @@ function getArgsJson (req, maxInputSize) {
 function getArgsForm (req, maxInputSize) {
   const maxBytes = bytes(maxInputSize)
   return new Promise((resolve, reject) => {
-    const busboy = Busboy({ headers: req.headers })
+    const busboy = Busboy({ headers: req.headers, defParamCharset: 'utf8' })
     const form = { }
 
     busboy.on('file', function (field, stream, { filename: name, encoding, mimeType: mimetype }) {

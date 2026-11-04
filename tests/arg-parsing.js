@@ -62,7 +62,7 @@ describe('buhoi arg parsing', function () {
   it('should receive forms with files', async function () {
     const form = new FormData()
     form.append('user_id', 10)
-    form.append('avatar', new Blob(await fs.createReadStream(`${__dirname}/app/public/index.html`).toArray()))
+    form.append('avatar', new Blob(await fs.createReadStream(`${__dirname}/app/public/index.html`).toArray(), { type: 'text/csv' }), 'users.csv')
 
     const { status } = await request({
       url: 'https://localhost:3001/rpc/users.uploadAvatar',
@@ -78,5 +78,8 @@ describe('buhoi arg parsing', function () {
     args[0].user_id.should.eql('10')
     args[0].should.have.property('avatar')
     args[0].avatar.buffer.should.eql(Buffer.from('myindex'))
+    args[0].avatar.name.should.eql('users.csv')
+    args[0].avatar.encoding.should.eql('7bit')
+    args[0].avatar.mimetype.should.eql('text/csv')
   })
 })

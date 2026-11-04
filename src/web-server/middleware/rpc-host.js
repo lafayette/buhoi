@@ -136,7 +136,7 @@ function getArgsForm (req, maxInputSize) {
     const busboy = Busboy({ headers: req.headers })
     const form = { }
 
-    busboy.on('file', function (field, stream, name, encoding, mimetype) {
+    busboy.on('file', function (field, stream, { filename: name, encoding, mimeType: mimetype }) {
       const buffers = []
       let length = 0
       stream.on('data', b => {
@@ -151,7 +151,7 @@ function getArgsForm (req, maxInputSize) {
       stream.on('end', () => form[field] = { buffer: Buffer.concat(buffers), name, encoding, mimetype })
     })
 
-    busboy.on('field', function (field, value, isFieldTruncated, isValueTruncated, encoding, mimetype) {
+    busboy.on('field', function (field, value) {
       form[field] = value
     })
 
